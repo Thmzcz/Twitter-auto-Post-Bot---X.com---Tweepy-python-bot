@@ -5,9 +5,9 @@ import schedule
 import time
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'config'))
-import keys
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-from functions import initialize_tweepy, get_formatted_date
+import keys
+from src.functions import initialize_tweepy, get_formatted_date
 
 def send_post():
     client, _ = initialize_tweepy()

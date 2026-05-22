@@ -3,3 +3,5 @@ schedule
 openai
 click
 flask
+python-dotenv
+python-telegram-bot

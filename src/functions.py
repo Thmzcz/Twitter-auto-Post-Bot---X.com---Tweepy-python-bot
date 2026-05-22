@@ -1,14 +1,17 @@
 import tweepy
 import datetime
+import os
 import sys
 from openai import OpenAI
-sys.path.append('../config')
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'config'))
 import keys  
 
 
 def initialize_tweepy():
     client = tweepy.Client(keys.bearer_token, keys.api_key, keys.api_secret, keys.access_token, keys.access_token_secret)
-    auth = tweepy.OAuthHandler(keys.api_key, keys.api_secret, keys.access_token, keys.access_token_secret)
+    auth = tweepy.OAuth1UserHandler(keys.api_key, keys.api_secret)
+    auth.set_access_token(keys.access_token, keys.access_token_secret)
     api = tweepy.API(auth)
     return client, api
 
@@ -18,7 +21,7 @@ def get_formatted_date():
 
 def generate_response(prompt):
     client = OpenAI(api_key=keys.openai_key)
-    model = "gpt-5.4-nano-2026-03-17"
+    model = "gpt-4o-mini"
     messages = [
         {"role": "system", "content": "You are a helpful assistant."},
         {"role": "user", "content": prompt}
